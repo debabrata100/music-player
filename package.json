@@ -1,0 +1,32 @@
+{
+  "name": "music-player",
+  "version": "1.0.0",
+  "description": "Click on a song and start listening",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debabrata100/music-player.git"
+  },
+  "keywords": [
+    "music",
+    "player",
+    "react",
+    "node"
+  ],
+  "author": "debabrata100",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/debabrata100/music-player/issues"
+  },
+  "homepage": "https://github.com/debabrata100/music-player#readme",
+  "dependencies": {
+    "next": "^9.4.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
