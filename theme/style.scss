@@ -1,0 +1,51 @@
+body {
+    font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
+      'Arial', sans-serif;
+    padding: 0px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  button.switch {
+    margin: 0;
+    padding: 0;
+    width: 70px;
+    height: 26px;
+    border: 0px;
+    display: inline-flex;
+    margin-right: 0.25em;
+    line-height: 20px;
+    vertical-align: middle;
+    text-align: center;
+    font: 12px "Open Sans", "Arial", serif;
+  }
+  
+  button.switch span {
+    padding: 0 0px;
+    display: block;
+    height: 26px;
+    width: 50%;
+    pointer-events: none;
+    transition: background 0.5s;
+  }
+  [role="switch"][aria-checked="false"] :first-child,
+  [role="switch"][aria-checked="true"] :last-child {
+    background: #000;
+    color: #eef;
+    line-height: 26px;
+  }
+  
+  [role="switch"][aria-checked="false"] :last-child,
+  [role="switch"][aria-checked="true"] :first-child {
+    color: #bbd;
+    line-height: 26px;
+  }
+  
+  label.switch {
+    user-select: none;
+    vertical-align: middle;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+  }

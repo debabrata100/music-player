@@ -1,5 +1,12 @@
+import Layout from "../components/Layout";
+import { useContext } from "react";
+import { ThemeContext } from '../components/Layout';
 export default () => {
+    const theme = useContext(ThemeContext);
+    console.log("theme",theme);
     return (
-        <div>Welcome to music player</div>
+        <Layout>
+            Layout added
+        </Layout>
     );
 }
