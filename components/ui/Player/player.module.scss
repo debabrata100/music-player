@@ -1,0 +1,89 @@
+$primaryColor: #f08;
+$controlBackground: #1D1D1D;
+%flex-center{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    width: 100%;
+    box-sizing: border-box;
+    // border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0px;
+    color: #fff;
+    .progressBar{
+        width: 100%;
+        height: 8px;
+        background-color: $controlBackground;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+    .audioControls{
+        min-height: 70px;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: $controlBackground;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        .trackInfo{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            margin-left: 10%;
+            img{
+                height: 50px;
+            }
+            .artistInfo{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                font-size: 12px;
+                color: #fff;
+                margin-left: 16px;
+                line-height: 20px;
+            }
+        }
+        .playControls{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            .currentTime{
+                font-size: 12px;
+                display: inline-block;
+                width: 60px;
+            }
+            .prevTrack{
+                width: 50px;
+                height: 50px;
+                @extend %flex-center;
+                cursor: pointer;
+            }
+            .playTrack{
+                width: 50px;
+                height: 50px;
+                // background-color: $primaryColor;
+                @extend %flex-center;
+                cursor: pointer;
+            }
+            .nextTrack{
+                width: 50px;
+                height: 50px;
+                // background-color: $primaryColor;
+                @extend %flex-center;
+                cursor: pointer;
+            }
+        }
+    }
+    .audio{
+        display: none;
+    }
+}

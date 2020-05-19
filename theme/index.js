@@ -7,6 +7,9 @@ export default {
         },
         search: {
             color: primaryColor
+        },
+        main: {
+            backgroundColor: '#000'
         }
     },
     lightMode: {
@@ -15,6 +18,9 @@ export default {
         },
         search: {
             color: lightColor
+        },
+        main: {
+            backgroundColor: '#fff'
         }
     }
 }

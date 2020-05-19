@@ -4,6 +4,7 @@ body {
     padding: 0px;
     width: 100%;
     margin: 0 auto;
+    font-size: 16px;
   }
 
   button.switch {
@@ -48,4 +49,108 @@ body {
     -ms-user-select: none;
     -webkit-user-select: none;
     -o-user-select: none;
+  }
+
+  %prev-btn-props{
+    height: 0;
+    width: 0;
+    position: relative;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 10px solid #fff;
+    // border-color: #fff;
+  }
+  .prev-btn{
+      @extend %prev-btn-props;
+  }
+  .next-btn{
+    @extend %prev-btn-props;
+    transform: rotate(180deg);
+}
+  .prev-btn::before, .next-btn::before{
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: -4px;
+      height: 10px;
+      width: 2px;
+      background: #fff;
+    
+  }
+  .play-btn {
+        width: 0;
+        height: 0;
+        border-top: 13px solid transparent;
+        border-left: 20px solid #fff;
+        border-bottom: 13px solid transparent;
+        // margin: 0px 100px;
+      }
+  
+  .pause-btn{
+    height: 25px;
+    width: 8px;
+    background: #fff;
+    position: relative;
+    margin-right: 12px;
+    // margin: 0px 100px;
+  }
+  .pause-btn::after{
+      content: "";
+      height: 25px;
+      width: 8px;
+      position: absolute;
+      background: #fff;
+      left: 15px;
+  }
+  
+  .progress-bar{
+    height: 2px;
+    width: 100%;
+    background: pink;
+    position: relative;
+  }
+  .progress-bar:hover, .progress-bar:hover .bar{
+      height: 4px;
+  }
+  .progress-bar:hover .point{
+      bottom: -3px;
+      display: inline;
+  }
+  .bar{
+      content: "";
+      height: 2px;
+    //   width: 30%;
+      background-color: #f08;
+      position: absolute;
+  }
+  .point{
+      content: "";
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      background-color: #f08;
+      position: absolute;
+      display: none;
+      bottom: -5px;
+  }
+  
+  .audio-loading {
+    border: 3px solid #fff;
+    border-radius: 50%;
+    border-top: 3px solid #000;
+    width: 20px;
+    height: 20px;
+    -webkit-animation: spin 1s linear infinite; /* Safari */
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }

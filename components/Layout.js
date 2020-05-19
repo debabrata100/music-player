@@ -39,7 +39,7 @@ export default ({ children }) => {
                         <Switch onChange={onChangeTheme} />
                     </div>
                 </header>
-                <main>{children}</main>
+                <main style={currentTheme.main}>{children}</main>
             </nav>
         </ThemeContext.Provider>
     );
