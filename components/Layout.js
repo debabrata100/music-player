@@ -7,7 +7,7 @@ import { Switch } from './ui';
 import styles from './layout.module.scss';
 export const ThemeContext = React.createContext(themes.darkMode);
 const siteTitle = "Music Player";
-export default ({ children }) => {
+export default ({ children, onSearchSongs }) => {
     const [currentTheme, setCurrentTheme] = useState(themes.darkMode);
     const onChangeTheme = (checked) => {
         if(checked){
@@ -34,12 +34,14 @@ export default ({ children }) => {
                 </Head>
                 <header className={styles.header} style={currentTheme.header}>
                     <Link href="/"><a><img className={styles.logo} src="/logo.png" alt="Logo" /></a></Link>
-                    <div className={styles.searchBox} style={currentTheme.search}>Music Player</div>
+                    <div className={styles.searchBox} style={currentTheme.search}>
+                        <input onChange={(e) => onSearchSongs(e.target.value)} type="text" placeholder="Search Artist or Albums  " />
+                    </div>
                     <div className={styles.switchTheme}>
                         <Switch onChange={onChangeTheme} />
                     </div>
                 </header>
-                <main style={currentTheme.main}>{children}</main>
+                <main style={currentTheme.main} className={styles.main}>{children}</main>
             </nav>
         </ThemeContext.Provider>
     );

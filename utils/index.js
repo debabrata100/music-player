@@ -8,13 +8,18 @@ export function getTimeProgressMinutes({ duration, currentTime}){
         progress: progress < 100 ? progress : 100
     }
 }
-
-export async function requestSongs(searchText = ""){
+const DEFALUT_ARTIST = 'alec-benjamin';
+export async function requestSongs(searchText = "alec-benjamin"){
     try{
-        const songs = await fetch('http://www.mocky.io/v2/5ec2c2222f00009aafc355da');
+        const songs = await fetch(`https://deezerdevs-deezer.p.rapidapi.com/search?q=${searchText || DEFALUT_ARTIST}`, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+                "x-rapidapi-key": "678607cc0amsh199183a745fa718p1838ddjsn7c9ccbda4f93"
+            }
+        });
         return await songs.json();
     }catch {
         return [];
     }
-
 }

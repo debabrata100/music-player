@@ -11,7 +11,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-evenly;
         flex-wrap: wrap;
         .song{
             display: flex;
@@ -20,7 +20,7 @@
             .songImage{
                 height: 190px;
                 width: 195px;
-                background-color: #f08;
+                border: 1px solid #ff0088;
                 position: relative;
                 margin-bottom: 8px;
                 border-radius: 4px;
@@ -44,9 +44,23 @@
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
-                font-size: 14px;
+                font-size: 13px;
+                color: #fff;
+                .songName{
+                    white-space: nowrap; 
+                    width: 195px; 
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
             }
 
         }
     }
+}
+.noSongFound{
+    margin-top: 32px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
 }

@@ -6,24 +6,6 @@ const getImageStyle = (album) => {
     return { backgroundImage: `url(${album.cover_medium})`}
 }
 export default function SongList({ songList = [], onPlaySelected }){
-    useEffect(()=>{
-
-        // fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=alec-benjamin", {
-        //     "method": "GET",
-        //     "headers": {
-        //         "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-        //         "x-rapidapi-key": "678607cc0amsh199183a745fa718p1838ddjsn7c9ccbda4f93"
-        //     }
-        // })
-        // .then(response => {
-        //     console.log("response",response);
-        // })
-        // .catch(err => {
-        //     console.log("err",err);
-        // });
-
-    },[])
-    // console.log("songList",songList)
     return (
         <div className={styles.container}>
             <div className={styles.songList}>
@@ -38,7 +20,7 @@ export default function SongList({ songList = [], onPlaySelected }){
                                     </div>
                                 </div>
                                 <div className={styles.songInfo}>
-                                    <span className={styles.songName}>{song.title}</span>
+                                    <span className={styles.songName} title={song.title_short}>{song.title_short}</span>
                                     <span className={styles.artist}>Artist. {song.artist.name}</span>
                                 </div>
                             </div>
@@ -46,6 +28,7 @@ export default function SongList({ songList = [], onPlaySelected }){
                     })
                 }
             </div>
+            { songList.length < 1 && <div className={styles.noSongFound}>No Song Found!</div>}
         </div>
     );
 }

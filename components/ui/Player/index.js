@@ -1,4 +1,5 @@
 import styles from './player.module.scss';
+import PropTypes from 'prop-types';
 import { useRef, useEffect, useState } from 'react';
 import { getTimeProgressMinutes } from 'utils';
 export default function Player({songInfo}){
@@ -102,4 +103,8 @@ export default function Player({songInfo}){
             <audio onLoadedData={onLoadedData} onTimeUpdate={onTimeUpdate} className={styles.audio} onCanPlay={onCanPlay}  preload="auto"  ref={audioRef} />
         </div>
     );
+}
+
+Player.propTypes = {
+    songInfo: PropTypes.object
 }
