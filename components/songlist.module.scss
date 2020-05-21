@@ -17,28 +17,7 @@
             display: flex;
             flex-direction: column;
             margin-bottom: 16px;
-            .songImage{
-                height: 190px;
-                width: 195px;
-                border: 1px solid #ff0088;
-                position: relative;
-                margin-bottom: 8px;
-                border-radius: 4px;
-                @extend %flex-row-center;
-                cursor: pointer;
-                .playButton{
-                    display: none;
-                }
-            }
-            .songImage:hover .playButton{
-                display: inline-block;
-            }
-            .songImage:hover, .songImage.playing{
-                opacity: 0.8;
-                .playButton{
-                    display: inline-block;
-                }
-            }
+            
         
             .songInfo{
                 display: flex;
@@ -57,10 +36,41 @@
         }
     }
 }
+.songImage{
+    height: 190px;
+    width: 195px;
+    position: relative;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    @extend %flex-row-center;
+    cursor: pointer;
+    .playButton{
+        display: none;
+    }
+}
+.songImage:hover .playButton{
+    display: inline-block;
+}
+.songImage:hover, .songImage.playing{
+    opacity: 0.8;
+    .playButton{
+        display: inline-block;
+    }
+}
 .noSongFound{
     margin-top: 32px;
     text-align: center;
     font-size: 18px;
     font-weight: bold;
     color: #fff;
+}
+
+@media(max-width: 767px){
+    .songImage{
+        height: 190px;
+        width: 300px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        
+    }
 }

@@ -20,11 +20,11 @@ export default ({ children, onSearchSongs }) => {
         <ThemeContext.Provider value={currentTheme}>
             <nav className={styles.container}>
                 <Head>
+                    <meta charSet='utf-8' />
+                    <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
+                    <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
                     <link rel="icon" href="/favicon.ico" />
-                    <meta
-                    name="description"
-                    content="Music Player"
-                    />
+                    <meta name="description" content="Music Player" />
                     <meta name="og:title" content={siteTitle} />
                     <meta name="twitter:card" content="summary_large_image" />
                     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -34,8 +34,8 @@ export default ({ children, onSearchSongs }) => {
                 </Head>
                 <header className={styles.header} style={currentTheme.header}>
                     <Link href="/"><a><img className={styles.logo} src="/logo.png" alt="Logo" /></a></Link>
-                    <div className={styles.searchBox} style={currentTheme.search}>
-                        <input onChange={(e) => onSearchSongs(e.target.value)} type="text" placeholder="Search Artist or Albums  " />
+                    <div className={styles.searchBox} >
+                        <input style={currentTheme.searchBox} onChange={(e) => onSearchSongs(e.target.value)} type="text" placeholder="Search Artist or Album " />
                     </div>
                     <div className={styles.switchTheme}>
                         <Switch onChange={onChangeTheme} />
