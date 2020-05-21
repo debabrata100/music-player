@@ -11,11 +11,15 @@ export async function getStaticProps(){
     return { props: { songs: songs.data }};
 }
 export default ({ songs = [] }) => {
-    const { songList, songInfo, onPlaySelected, onSearchSongs, isSearching } = useSearchSongs(songs);
+    const { songList, songInfo, isSearching, onPlaySelected, onSearchSongs, onPlayPrevSong, onPlayNextSong } = useSearchSongs(songs);
     return (
         <Layout onSearchSongs={onSearchSongs} isSearching={isSearching}>
             <SongList onPlaySelected={onPlaySelected} songList = {songList} />
-            {songInfo && <Player songInfo={songInfo} />}
+            {songInfo && <Player 
+                onPlayPrevSong = { onPlayPrevSong }  
+                onPlayNextSong = { onPlayNextSong } 
+                songInfo={songInfo} 
+            />}
         </Layout>
     );
 }
@@ -47,6 +51,23 @@ export function useSearchSongs(songs){
         setSongList(formattedSongList);
         setSongInfo(song)
     }
+    const onPlayNextSong = () => {
+        const currentSongIndex = songList.findIndex(s=>s.isPlaying === true);
+        if(currentSongIndex < songList.length-1){
+            onPlaySelected(songList[currentSongIndex+1]);
+        }else if(currentSongIndex === songList.length-1){
+            onPlaySelected(songList[0]);
+        }
+    }
+    const onPlayPrevSong = () => {
+        const currentSongIndex = songList.findIndex(s=>s.isPlaying === true);
+        if(currentSongIndex > 0){
+            onPlaySelected(songList[currentSongIndex-1]);
+        }else if(currentSongIndex === 0){
+            onPlaySelected(songList[songList.length-1]);
+        }
+    }
+
     const onSearchSongs = debounce(async function(searchText){
         setIsSearching(true);
         const songs = await requestSongs(searchText);
@@ -58,6 +79,8 @@ export function useSearchSongs(songs){
         songInfo,
         isSearching,
         onSearchSongs,
-        onPlaySelected
+        onPlaySelected,
+        onPlayNextSong,
+        onPlayPrevSong
     }
 }

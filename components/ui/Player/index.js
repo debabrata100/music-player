@@ -2,7 +2,7 @@ import styles from './player.module.scss';
 import PropTypes from 'prop-types';
 import { useRef, useEffect, useState } from 'react';
 import { getTimeProgressMinutes } from 'utils';
-export default function Player({songInfo}){
+export default function Player({ songInfo, onPlayNextSong, onPlayPrevSong }){
     const [playState, setPlayState] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
     const [currentPreviewUrl, setCurrentPreviewUrl] = useState('');
@@ -48,12 +48,8 @@ export default function Player({songInfo}){
             setPlayState(true);
         }
     }
-    const onPreviousTrack = () => {
-
-    }
-    const onNextTrack = () => {
-
-    }
+    const onPreviousTrack = () => onPlayPrevSong();
+    const onNextTrack = () => onPlayNextSong();
     const onLoadedData = (e) => {
         if(audioRef.current.readyState > 2){
             setIsLoading(false);
