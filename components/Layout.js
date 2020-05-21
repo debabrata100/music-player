@@ -3,11 +3,11 @@ import themes from '../theme';
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Switch } from './ui';
+import { Switch, SearchBox } from './ui';
 import styles from './layout.module.scss';
 export const ThemeContext = React.createContext(themes.darkMode);
 const siteTitle = "Music Player";
-export default ({ children, onSearchSongs }) => {
+export default ({ children, onSearchSongs, isSearching }) => {
     const [currentTheme, setCurrentTheme] = useState(themes.darkMode);
     const onChangeTheme = (checked) => {
         if(checked){
@@ -34,9 +34,12 @@ export default ({ children, onSearchSongs }) => {
                 </Head>
                 <header className={styles.header} style={currentTheme.header}>
                     <Link href="/"><a><img className={styles.logo} src="/logo.png" alt="Logo" /></a></Link>
-                    <div className={styles.searchBox} >
-                        <input style={currentTheme.searchBox} onChange={(e) => onSearchSongs(e.target.value)} type="text" placeholder="Search Artist or Album " />
-                    </div>
+                    <SearchBox 
+                        style={currentTheme.searchBox} 
+                        onChange={(e) => onSearchSongs(e.target.value)} 
+                        isLoading = { isSearching }
+                        placeholder="Search Artist or Album "
+                    />
                     <div className={styles.switchTheme}>
                         <Switch onChange={onChangeTheme} />
                     </div>

@@ -1,40 +1,41 @@
 import Layout from "../components/Layout";
-import { useContext, useState, useEffect } from "react";
-import { ThemeContext } from '../components/Layout';
+import { useState, useEffect } from "react";
 import { Player } from "../components/ui";
 import SongList from "components/SongList";
-import { requestSongs } from "utils";
+import { requestSongs, debounce } from "utils";
+
+const DEBOUNCE_DELAY = 500;
 
 export async function getStaticProps(){
     const songs = await requestSongs();
     return { props: { songs: songs.data }};
 }
-const DEBOUNCE_DELAY = 500;
-const debounce = (func, delay) => { 
-    let debounceTimer; 
-    return function() { 
-        const context = this;
-        const args = arguments; 
-            clearTimeout(debounceTimer); 
-            debounceTimer = setTimeout(() => func.apply(context, args), delay) 
-    } 
-}  
 export default ({ songs = [] }) => {
-    const theme = useContext(ThemeContext);
-    const [songInfo, setSongInfo] = useState(null);
+    const { songList, songInfo, onPlaySelected, onSearchSongs, isSearching } = useSearchSongs(songs);
+    return (
+        <Layout onSearchSongs={onSearchSongs} isSearching={isSearching}>
+            <SongList onPlaySelected={onPlaySelected} songList = {songList} />
+            {songInfo && <Player songInfo={songInfo} />}
+        </Layout>
+    );
+}
+
+export function useSearchSongs(songs){
     const [songList, setSongList] = useState([]);
+    const [songInfo, setSongInfo] = useState(null);
+    const [isSearching, setIsSearching] = useState(false);
     useEffect(()=>{
-       loadSongs(songs);
-    },[songs])
-    const loadSongs = songs => {
-        if(songs.length > 0){
-            const formattedSongList = songs.map(s=>({...s, isPlaying: false }));
-            setSongList(formattedSongList);
-        }else{
-            setSongList([]);
-        }
-    }
-    const onPlaySelected = (song) => {
+        loadSongs(songs);
+     },[songs])
+     const loadSongs = songs => {
+         if(songs.length > 0){
+             const formattedSongList = songs.map(s=>({...s, isPlaying: false }));
+             setSongList(formattedSongList);
+         }else{
+             setSongList([]);
+         }
+     }
+     const onPlaySelected = (song) => {
         const formattedSongList = songList.map(s=>{
             if(song.id === s.id){
                 s.isPlaying = true;
@@ -47,13 +48,16 @@ export default ({ songs = [] }) => {
         setSongInfo(song)
     }
     const onSearchSongs = debounce(async function(searchText){
+        setIsSearching(true);
         const songs = await requestSongs(searchText);
         loadSongs(songs.data);
-    },DEBOUNCE_DELAY)
-    return (
-        <Layout onSearchSongs={onSearchSongs}>
-            <SongList onPlaySelected={onPlaySelected} songList = {songList} />
-            {songInfo && <Player songInfo={songInfo} />}
-        </Layout>
-    );
+        setIsSearching(false);
+    },DEBOUNCE_DELAY);
+    return {
+        songList,
+        songInfo,
+        isSearching,
+        onSearchSongs,
+        onPlaySelected
+    }
 }

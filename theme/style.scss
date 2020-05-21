@@ -154,3 +154,7 @@ body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  input[type="search"]::-webkit-search-cancel-button {
+    cursor: pointer;
+  }
