@@ -158,3 +158,14 @@ body {
   input[type="search"]::-webkit-search-cancel-button {
     cursor: pointer;
   }
+  .toggle-player{
+    height: 0;
+    width: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff;
+    cursor: pointer;
+  }
+  .toggle-player.invert{
+    transform: rotate(180deg)
+  }

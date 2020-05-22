@@ -68,6 +68,7 @@ $controlBackground: #1D1D1D;
     align-items: center;
     justify-content: flex-start;
     margin-left: 10%;
+    cursor: pointer;
     img{
         height: 50px;
     }
@@ -86,6 +87,10 @@ $controlBackground: #1D1D1D;
     font-size: 12px;
     display: inline-block;
     width: 60px;
+}
+.otherControls{
+    position: absolute;
+    right: 16px;
 }
 @media (max-width: 767px){
     .currentTime{

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Player } from "../components/ui";
 import SongList from "components/SongList";
 import { requestSongs, debounce } from "utils";
+import SongDetails from "components/SongDetails";
 
 const DEBOUNCE_DELAY = 500;
 
@@ -11,15 +12,26 @@ export async function getStaticProps(){
     return { props: { songs: songs.data }};
 }
 export default ({ songs = [] }) => {
-    const { songList, songInfo, isSearching, onPlaySelected, onSearchSongs, onPlayPrevSong, onPlayNextSong } = useSearchSongs(songs);
+    const { 
+        songList, songInfo, isSearching, showSongDetails,
+        onPlaySelected, onSearchSongs, onPlayPrevSong, onPlayNextSong, 
+        onToggleSongDetails } = useSearchSongs(songs);
     return (
         <Layout onSearchSongs={onSearchSongs} isSearching={isSearching}>
-            <SongList onPlaySelected={onPlaySelected} songList = {songList} />
+            {!showSongDetails && <SongList onPlaySelected={onPlaySelected} songList = {songList} />}
             {songInfo && <Player 
                 onPlayPrevSong = { onPlayPrevSong }  
                 onPlayNextSong = { onPlayNextSong } 
                 songInfo={songInfo} 
+                showSongDetails={showSongDetails}
+                onToggleSongDetails={onToggleSongDetails}
             />}
+            { (songInfo && showSongDetails) && <SongDetails 
+                onToggleSongDetails={onToggleSongDetails} 
+                showSongDetails={showSongDetails}
+                onPlaySelected={onPlaySelected} 
+                songInfo={songInfo} 
+                songList = {songList} /> }
         </Layout>
     );
 }
@@ -28,6 +40,7 @@ export function useSearchSongs(songs){
     const [songList, setSongList] = useState([]);
     const [songInfo, setSongInfo] = useState(null);
     const [isSearching, setIsSearching] = useState(false);
+    const [showSongDetails, setShowSongDetails] = useState(false);
     useEffect(()=>{
         loadSongs(songs);
      },[songs])
@@ -73,14 +86,17 @@ export function useSearchSongs(songs){
         const songs = await requestSongs(searchText);
         loadSongs(songs.data);
         setIsSearching(false);
+        setShowSongDetails(false);
     },DEBOUNCE_DELAY);
     return {
         songList,
         songInfo,
         isSearching,
+        showSongDetails,
         onSearchSongs,
         onPlaySelected,
         onPlayNextSong,
-        onPlayPrevSong
+        onPlayPrevSong,
+        onToggleSongDetails: () => setShowSongDetails(!showSongDetails)
     }
 }

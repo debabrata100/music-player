@@ -2,7 +2,8 @@ import styles from './player.module.scss';
 import PropTypes from 'prop-types';
 import { useRef, useEffect, useState } from 'react';
 import { getTimeProgressMinutes } from 'utils';
-export default function Player({ songInfo, onPlayNextSong, onPlayPrevSong }){
+import { TogglePlayer } from '..';
+export default function Player({ songInfo, onPlayNextSong, onPlayPrevSong, showSongDetails, onToggleSongDetails }){
     const [playState, setPlayState] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
     const [currentPreviewUrl, setCurrentPreviewUrl] = useState('');
@@ -37,7 +38,6 @@ export default function Player({ songInfo, onPlayNextSong, onPlayPrevSong }){
         const clickX = e.nativeEvent.offsetX;
         const duration = audioRef.current.duration;
         audioRef.current.currentTime = (clickX/barWidth) * duration;
-        // console.log(progressRef.current.clientWidth, e.nativeEvent.offsetX)
     }
     const onTogglePlay = (e) => {
         if(playState){
@@ -57,12 +57,7 @@ export default function Player({ songInfo, onPlayNextSong, onPlayPrevSong }){
             setIsLoading(true);
         }
     }
-    const onCanPlay = (e) => {
-        // console.log(e)
-        // console.log(e.readyState)
-    }
-    // console.log("play-state",playState);
-    
+   
     return (
         <div className={styles.container}>
             <div className={styles.progressBar} ref={progressRef} onClick={onSetProgress}>
@@ -73,30 +68,32 @@ export default function Player({ songInfo, onPlayNextSong, onPlayPrevSong }){
             </div>
             <div className={styles.audioControls}>
                 <div className={styles.playControls}>
-                    <div onClick={onPreviousTrack} className={styles.prevTrack}>
-                        <div className="prev-btn" title="Previous song"></div>
+                    <div role="button" aria-label="Previous song" title="Previous song" onClick={onPreviousTrack} className={styles.prevTrack}>
+                        <div className="prev-btn"></div>
                     </div>
                     <div onClick={onTogglePlay} className={styles.playTrack}>
                         {(playState && !isLoading) && <div className="pause-btn" title="Pause"></div>}
                         {(!playState && !isLoading) && <div className="play-btn" title="Play"></div>}
                         {isLoading && <div className="audio-loading"></div>}
                     </div>
-                    <div onClick={onNextTrack} className={styles.nextTrack}>
-                        <div className="next-btn" title="Next song"></div>
+                    <div role="button" aria-label="Next song" title="Next song" onClick={onNextTrack} className={styles.nextTrack}>
+                        <div className="next-btn" ></div>
                     </div>
                     <span className={styles.currentTime} ref={currentTimeRef}></span>
                 </div>
-                <div className={styles.trackInfo}>
+                <div className={styles.trackInfo} onClick={onToggleSongDetails}>
                     <div className={styles}><img src={songInfo.album.cover_small} alt="album cover" /></div>
                     <div className={styles.artistInfo}>
                         <span>{songInfo.title}</span>
                         <span>{songInfo.artist.name}</span>
                     </div>
                 </div>
-                {/* <div className={styles.otherControls}>other controls</div> */}
+                <div className={styles.otherControls}>
+                    <TogglePlayer isOn={showSongDetails} onClick={onToggleSongDetails} />
+                </div>
             </div>
             
-            <audio onLoadedData={onLoadedData} onTimeUpdate={onTimeUpdate} className={styles.audio} onCanPlay={onCanPlay}  preload="auto"  ref={audioRef} />
+            <audio onLoadedData={onLoadedData} onTimeUpdate={onTimeUpdate} className={styles.audio}  preload="auto"  ref={audioRef} />
         </div>
     );
 }
