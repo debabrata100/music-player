@@ -31,6 +31,8 @@ export default ({ children, onSearchSongs, isSearching }) => {
                     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
                     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
                     <link rel="manifest" href="/manifest.json" />
+                    <meta name="theme-color" content="#ff0088"/>
+                    <title>{siteTitle}</title>
                 </Head>
                 <header className={styles.header} style={currentTheme.header}>
                     <Link href="/"><a><img className={styles.logo} src="/logo.png" alt="Logo" /></a></Link>
