@@ -17,6 +17,10 @@ export default {
         },
         songInfo: {
             color: '#fff'
+        },
+        songDetails:{
+            backgroundColor: '#000',
+            color: '#fff'
         }
     },
     lightMode: {
@@ -32,6 +36,10 @@ export default {
             backgroundColor: '#fff'
         },
         songInfo: {
+            color: '#000'
+        },
+        songDetails:{
+            backgroundColor: '#fff',
             color: '#000'
         }
     }

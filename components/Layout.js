@@ -40,6 +40,13 @@ export default ({ children, onSearchSongs, isSearching }) => {
                         isLoading = { isSearching }
                         placeholder="Search Artist or Album "
                     />
+                    <a href="https://github.com/debabrata100/music-player"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.githubLink}
+                    >
+                    <img src="/images/github-logo.png" height={32} alt="github logo" />
+                    </a>
                     <div className={styles.switchTheme}>
                         <Switch onChange={onChangeTheme} />
                     </div>

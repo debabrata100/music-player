@@ -28,17 +28,23 @@
         }
     }
 }
-
+.githubLink{
+    img{
+        color: #fff;
+    }
+}
 .main{
     margin-top: 60px;
     padding-bottom: 80px;
     box-sizing: border-box;
     min-height: 90vh;
     z-index: 0;
-    // overflow-y: scroll;
 }
 @media (max-width: 767px){
     .main{
         padding-bottom: 60px;
+    }
+    .githubLink{
+        display: none;
     }
 }

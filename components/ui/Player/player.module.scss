@@ -9,7 +9,6 @@ $controlBackground: #1D1D1D;
 .container{
     width: 100%;
     box-sizing: border-box;
-    // border: 2px solid;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -50,14 +49,12 @@ $controlBackground: #1D1D1D;
     .playTrack{
         width: 50px;
         height: 50px;
-        // background-color: $primaryColor;
         @extend %flex-center;
         cursor: pointer;
     }
     .nextTrack{
         width: 50px;
         height: 50px;
-        // background-color: $primaryColor;
         @extend %flex-center;
         cursor: pointer;
     }
@@ -99,5 +96,8 @@ $controlBackground: #1D1D1D;
     .audioControls{
         flex-direction: row-reverse;
         justify-content: flex-end;
+    }
+    .otherControls{
+        display: none;
     }
 }
