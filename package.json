@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/debabrata100/music-player#readme",
   "dependencies": {
-    "next": "^9.4.0",
+    "next": "^11.1.0",
     "next-pwa": "^2.4.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
